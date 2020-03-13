@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
+#include <unistd.h> 
+#include <sys/types.h> 
+#include <sys/wait.h> 
 
 #include "ccronexpr.h"
 
@@ -83,5 +86,14 @@ static crons_equal(cron_expr* cr1, cron_expr* cr2) {
 int main(){
     printf("Masukkan detik menit jam tanggal bulan tahun. Untuk yang kosong beri tanda * dan diberi jarak spasi untuk setiap item");
     scanf("%S %M %H %d %m %Y");
-    if ()
+    pid_t pid=fork();
+    if (pid==0) { 
+        static char *argv[]={"echo","ciluk baa.",NULL};
+        execv("/bin/echo",argv);
+        exit(127); 
+    }
+    else { 
+        waitpid(pid,0,0); 
+    }
+    return 0;
 }
